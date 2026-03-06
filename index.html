@@ -1,246 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Booth Magic</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coquette Photo Booth 🎀</title>
 
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            background: #f7f7f7;
-        }
+<style>
 
-        /* Main Container */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: "Comic Sans MS", cursive;
+}
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(45deg, #ff4081, #ff5722);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            border-bottom: 10px solid #fff;
-        }
+body{
+background:linear-gradient(135deg,#ffd6ec,#ffe9f3,#ffc8dd);
+overflow-x:hidden;
+color:#444;
+}
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
+/* SPARKLES */
 
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-        }
+.sparkle{
+position:fixed;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+opacity:0.8;
+animation:sparkle 5s linear infinite;
+}
 
-        .cta-button {
-            background-color: #ff9800;
-            color: white;
-            font-size: 1.2rem;
-            padding: 15px 40px;
-            border-radius: 30px;
-            border: none;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
+@keyframes sparkle{
+0%{transform:translateY(-10px) scale(0);}
+50%{transform:translateY(50vh) scale(1);}
+100%{transform:translateY(100vh) scale(0);}
+}
 
-        .cta-button:hover {
-            background-color: #e65100;
-            transform: scale(1.1);
-        }
+/* FLOATING BOWS */
 
-        /* Services Section */
-        .services {
-            padding: 60px 0;
-            text-align: center;
-            background-color: #ffffff;
-        }
+.bow{
+position:fixed;
+font-size:25px;
+animation:float 12s linear infinite;
+}
 
-        .services h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #ff4081;
-        }
+@keyframes float{
+0%{transform:translateY(-10vh) rotate(0deg);}
+100%{transform:translateY(110vh) rotate(360deg);}
+}
 
-        .service-card {
-            display: inline-block;
-            width: 30%;
-            margin: 10px;
-            padding: 20px;
-            border-radius: 10px;
-            background: #ffeb3b;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+/* NAVBAR */
 
-        .service-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 40px;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(10px);
+position:sticky;
+top:0;
+z-index:10;
+}
 
-        .service-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
+nav h1{
+color:#ff4fa3;
+}
 
-        .service-card p {
-            font-size: 1rem;
-            color: #333;
-        }
+nav a{
+text-decoration:none;
+margin-left:20px;
+font-weight:bold;
+color:#ff4fa3;
+}
 
-        /* About Section */
-        .about {
-            padding: 60px 0;
-            background: linear-gradient(135deg, #2196f3, #ff9800);
-            color: white;
-            text-align: center;
-        }
+nav a:hover{
+color:#ff79c6;
+}
 
-        .about h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
+/* HERO */
 
-        .about p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+.hero{
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
 
-        /* Contact Section */
-        .contact {
-            padding: 60px 0;
-            background-color: #f1f1f1;
-            text-align: center;
-        }
+.hero h2{
+font-size:60px;
+color:#ff4fa3;
+}
 
-        .contact h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #ff5722;
-        }
+.hero p{
+margin:15px;
+font-size:20px;
+}
 
-        .contact p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
+.btn{
+background:#ff4fa3;
+color:white;
+padding:12px 28px;
+border-radius:25px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 5px 15px rgba(255,0,150,0.3);
+}
 
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+.btn:hover{
+background:#ff79c6;
+}
 
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 1rem;
-        }
+/* PHOTO FRAME */
 
-        .contact-form button {
-            background-color: #ff4081;
-            color: white;
-            font-size: 1.2rem;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+.frame-section{
+display:flex;
+justify-content:center;
+padding:60px 20px;
+}
 
-        .contact-form button:hover {
-            background-color: #e91e63;
-        }
+.frame{
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+width:260px;
+}
 
-        /* Footer */
-        .footer {
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            text-align: center;
-        }
+.frame img{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
+}
 
-        .footer p {
-            font-size: 1rem;
-        }
-    </style>
+/* FEATURES */
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+padding:40px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card h3{
+color:#ff4fa3;
+}
+
+/* FOOTER */
+
+footer{
+margin-top:50px;
+padding:20px;
+background:#ffb3d6;
+text-align:center;
+}
+
+</style>
 </head>
+
 <body>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="container">
-            <h1>Photo Booth Magic</h1>
-            <p>Capture the Moment, Create the Memories!</p>
-            <button class="cta-button">Book Now</button>
-        </div>
-    </div>
+<!-- FLOATING BOWS -->
+<div class="bow" style="left:10%; animation-delay:0s;">🎀</div>
+<div class="bow" style="left:30%; animation-delay:3s;">🎀</div>
+<div class="bow" style="left:60%; animation-delay:5s;">🎀</div>
+<div class="bow" style="left:80%; animation-delay:2s;">🎀</div>
 
-    <!-- Services Section -->
-    <div class="services">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="service-card">
-                <h3>Wedding Photo Booth</h3>
-                <p>Bring the fun to your wedding with a custom photo booth experience.</p>
-            </div>
-            <div class="service-card">
-                <h3>Corporate Events</h3>
-                <p>Boost your business event with interactive photo booths and branding.</p>
-            </div>
-            <div class="service-card">
-                <h3>Birthday Parties</h3>
-                <p>Celebrate in style with fun and memorable photo moments!</p>
-            </div>
-        </div>
-    </div>
+<!-- SPARKLES -->
+<div class="sparkle" style="left:20%; animation-delay:1s;"></div>
+<div class="sparkle" style="left:50%; animation-delay:2s;"></div>
+<div class="sparkle" style="left:70%; animation-delay:4s;"></div>
+<div class="sparkle" style="left:40%; animation-delay:3s;"></div>
 
-    <!-- About Section -->
-    <div class="about">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>At Photo Booth Magic, we believe every event deserves to be unforgettable. With our high-quality, customizable photo booth experiences, your guests will be talking about your event for years to come. We provide a fun and interactive way to capture moments that will last a lifetime!</p>
-        </div>
-    </div>
+<nav>
+<h1>🎀 Coquette Booth</h1>
 
-    <!-- Contact Section -->
-    <div class="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <p>We'd love to help you make your event magical! Get in touch with us to discuss your event details, pricing, and booking information.</p>
-            <div class="contact-form">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Event Details..." required></textarea>
-                <button type="submit">Submit</button>
-            </div>
-        </div>
-    </div>
+<div>
+<a href="#">Home</a>
+<a href="#">Gallery</a>
+<a href="#">Packages</a>
+<a href="#">Book</a>
+</div>
+</nav>
 
-    <!-- Footer Section -->
-    <div class="footer">
-        <p>&copy; 2026 Photo Booth Magic. All Rights Reserved.</p>
-    </div>
+<section class="hero">
+
+<h2>Pretty Pink Photo Booth</h2>
+<p>Capture cute memories with bows, sparkles & coquette vibes ✨</p>
+
+<a class="btn">Book a Session</a>
+
+</section>
+
+<section class="frame-section">
+
+<div class="frame">
+<img src="https://picsum.photos/200?1">
+<img src="https://picsum.photos/200?2">
+<img src="https://picsum.photos/200?3">
+<img src="https://picsum.photos/200?4">
+</div>
+
+</section>
+
+<section class="features">
+
+<div class="card">
+<h3>🎀 Cute Props</h3>
+<p>Bows, pearls, hearts & aesthetic accessories.</p>
+</div>
+
+<div class="card">
+<h3>📸 HD Photos</h3>
+<p>High quality photos with instant prints.</p>
+</div>
+
+<div class="card">
+<h3>✨ Custom Frames</h3>
+<p>Choose adorable coquette photo layouts.</p>
+</div>
+
+<div class="card">
+<h3>💌 Instant Sharing</h3>
+<p>Send your photos directly to your phone.</p>
+</div>
+
+</section>
+
+<footer>
+<p>💗 Coquette Photo Booth — Made with bows & sparkles ✨</p>
+</footer>
 
 </body>
 </html>
