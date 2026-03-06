@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coquette Photo Booth 🎀</title>
+<title>CLICK & SMILE Photobooth</title>
 
 <style>
 
@@ -11,130 +11,41 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family: "Comic Sans MS", cursive;
+font-family:Arial, sans-serif;
 }
 
 body{
-background:linear-gradient(135deg,#ffd6ec,#ffe9f3,#ffc8dd);
+background:linear-gradient(135deg,#ff9ed6,#ffc8dd,#a0e7e5,#b4f8c8);
+background-size:400% 400%;
+animation:bgmove 10s infinite alternate;
+text-align:center;
 overflow-x:hidden;
-color:#444;
 }
 
-/* SPARKLES */
-
-.sparkle{
-position:fixed;
-width:6px;
-height:6px;
-background:white;
-border-radius:50%;
-opacity:0.8;
-animation:sparkle 5s linear infinite;
+@keyframes bgmove{
+0%{background-position:left;}
+100%{background-position:right;}
 }
 
-@keyframes sparkle{
-0%{transform:translateY(-10px) scale(0);}
-50%{transform:translateY(50vh) scale(1);}
-100%{transform:translateY(100vh) scale(0);}
-}
-
-/* FLOATING BOWS */
-
-.bow{
-position:fixed;
-font-size:25px;
-animation:float 12s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(-10vh) rotate(0deg);}
-100%{transform:translateY(110vh) rotate(360deg);}
-}
-
-/* NAVBAR */
+/* NAV */
 
 nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 40px;
-background:rgba(255,255,255,0.7);
-backdrop-filter:blur(10px);
-position:sticky;
-top:0;
-z-index:10;
-}
-
-nav h1{
-color:#ff4fa3;
-}
-
-nav a{
-text-decoration:none;
-margin-left:20px;
+padding:20px;
+font-size:30px;
 font-weight:bold;
-color:#ff4fa3;
-}
-
-nav a:hover{
-color:#ff79c6;
+color:#ff2e93;
 }
 
 /* HERO */
 
-.hero{
-height:90vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
-
-.hero h2{
-font-size:60px;
-color:#ff4fa3;
+.hero h1{
+font-size:50px;
+color:#ff2e93;
 }
 
 .hero p{
-margin:15px;
-font-size:20px;
-}
-
-.btn{
-background:#ff4fa3;
-color:white;
-padding:12px 28px;
-border-radius:25px;
-text-decoration:none;
-font-weight:bold;
-box-shadow:0 5px 15px rgba(255,0,150,0.3);
-}
-
-.btn:hover{
-background:#ff79c6;
-}
-
-/* PHOTO FRAME */
-
-.frame-section{
-display:flex;
-justify-content:center;
-padding:60px 20px;
-}
-
-.frame{
-background:white;
-padding:20px;
-border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
-width:260px;
-}
-
-.frame img{
-width:100%;
-border-radius:10px;
-margin-bottom:10px;
+margin:10px;
+font-size:18px;
 }
 
 /* FEATURES */
@@ -142,34 +53,119 @@ margin-bottom:10px;
 .features{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
+gap:20px;
 padding:40px;
 }
 
 .card{
 background:white;
 padding:25px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 8px 20px rgba(0,0,0,0.1);
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-10px);
+border-radius:15px;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
 .card h3{
-color:#ff4fa3;
+color:#ff2e93;
+margin-bottom:10px;
 }
 
-/* FOOTER */
+/* CAMERA */
+
+.booth{
+margin-top:20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:15px;
+}
+
+video{
+width:320px;
+border-radius:20px;
+border:6px solid white;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+button{
+background:#ff2e93;
+border:none;
+padding:12px 25px;
+border-radius:25px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff6bc1;
+}
+
+/* COUNTDOWN */
+
+#countdown{
+font-size:40px;
+font-weight:bold;
+color:#ff2e93;
+height:50px;
+}
+
+/* PHOTO STRIP */
+
+.strip{
+margin-top:30px;
+background:white;
+padding:15px;
+border-radius:15px;
+display:inline-block;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.strip img{
+width:200px;
+margin-bottom:8px;
+border-radius:10px;
+}
+
+/* PRICING */
+
+.pricing{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:40px;
+}
+
+.price-card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.price{
+font-size:35px;
+color:#ff2e93;
+margin:10px;
+}
+
+/* FLOATING EMOJIS */
+
+.float{
+position:fixed;
+font-size:25px;
+animation:float 12s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(-10vh);}
+100%{transform:translateY(110vh);}
+}
 
 footer{
-margin-top:50px;
-padding:20px;
-background:#ffb3d6;
-text-align:center;
+margin-top:40px;
+padding:15px;
+background:#ff9ed6;
+color:white;
 }
 
 </style>
@@ -177,76 +173,199 @@ text-align:center;
 
 <body>
 
-<!-- FLOATING BOWS -->
-<div class="bow" style="left:10%; animation-delay:0s;">🎀</div>
-<div class="bow" style="left:30%; animation-delay:3s;">🎀</div>
-<div class="bow" style="left:60%; animation-delay:5s;">🎀</div>
-<div class="bow" style="left:80%; animation-delay:2s;">🎀</div>
+<div class="float" style="left:10%">📸</div>
+<div class="float" style="left:40%;animation-delay:3s">✨</div>
+<div class="float" style="left:70%;animation-delay:6s">💖</div>
+<div class="float" style="left:85%;animation-delay:2s">📷</div>
 
-<!-- SPARKLES -->
-<div class="sparkle" style="left:20%; animation-delay:1s;"></div>
-<div class="sparkle" style="left:50%; animation-delay:2s;"></div>
-<div class="sparkle" style="left:70%; animation-delay:4s;"></div>
-<div class="sparkle" style="left:40%; animation-delay:3s;"></div>
-
-<nav>
-<h1>🎀 Coquette Booth</h1>
-
-<div>
-<a href="#">Home</a>
-<a href="#">Gallery</a>
-<a href="#">Packages</a>
-<a href="#">Book</a>
-</div>
-</nav>
+<nav>CLICK & SMILE 📸</nav>
 
 <section class="hero">
-
-<h2>Pretty Pink Photo Booth</h2>
-<p>Capture cute memories with bows, sparkles & coquette vibes ✨</p>
-
-<a class="btn">Book a Session</a>
-
+<h1>CLICK & SMILE</h1>
+<p>Capture the moment. Keep the smile.</p>
 </section>
 
-<section class="frame-section">
+<!-- FEATURES -->
 
-<div class="frame">
-<img src="https://picsum.photos/200?1">
-<img src="https://picsum.photos/200?2">
-<img src="https://picsum.photos/200?3">
-<img src="https://picsum.photos/200?4">
-</div>
-
-</section>
+<h2 style="color:#ff2e93;margin-top:30px;">Our Features</h2>
 
 <section class="features">
 
 <div class="card">
-<h3>🎀 Cute Props</h3>
-<p>Bows, pearls, hearts & aesthetic accessories.</p>
-</div>
-
-<div class="card">
 <h3>📸 HD Photos</h3>
-<p>High quality photos with instant prints.</p>
+<p>High quality camera for clear and beautiful pictures.</p>
 </div>
 
 <div class="card">
-<h3>✨ Custom Frames</h3>
-<p>Choose adorable coquette photo layouts.</p>
+<h3>🎭 Fun Props</h3>
+<p>Glasses, hats, signs and cute accessories.</p>
 </div>
 
 <div class="card">
-<h3>💌 Instant Sharing</h3>
-<p>Send your photos directly to your phone.</p>
+<h3>🖼 Photobooth Strips</h3>
+<p>Create classic 4-photo booth strips instantly.</p>
+</div>
+
+<div class="card">
+<h3>📱 Instant Download</h3>
+<p>Download your photos immediately after taking them.</p>
+</div>
+
+</section>
+
+<!-- PHOTOBOOTH -->
+
+<h2 style="color:#ff2e93;">Try Our Photobooth</h2>
+
+<section class="booth">
+
+<video id="video" autoplay></video>
+
+<div id="countdown"></div>
+
+<button onclick="startBooth()">Start Photobooth</button>
+<button onclick="downloadStrip()">Download Strip</button>
+
+</section>
+
+<div class="strip" id="strip"></div>
+
+<canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+<!-- PRICING -->
+
+<h2 style="color:#ff2e93;margin-top:40px;">Pricing Packages</h2>
+
+<section class="pricing">
+
+<div class="price-card">
+<h3>Mini Session</h3>
+<div class="price">$5</div>
+<p>3 Photos</p>
+<p>Digital Copy</p>
+<p>Basic Props</p>
+</div>
+
+<div class="price-card">
+<h3>Classic Booth</h3>
+<div class="price">$10</div>
+<p>6 Photos</p>
+<p>Printed Strip</p>
+<p>Fun Props Included</p>
+</div>
+
+<div class="price-card">
+<h3>Party Deluxe</h3>
+<div class="price">$15</div>
+<p>Unlimited Photos</p>
+<p>Premium Props</p>
+<p>Custom Frames</p>
 </div>
 
 </section>
 
 <footer>
-<p>💗 Coquette Photo Booth — Made with bows & sparkles ✨</p>
+©️ 2026 CLICK & SMILE Photobooth
 </footer>
+
+<script>
+
+const video=document.getElementById("video")
+const canvas=document.getElementById("canvas")
+const strip=document.getElementById("strip")
+const countdown=document.getElementById("countdown")
+const ctx=canvas.getContext("2d")
+
+let photos=[]
+
+navigator.mediaDevices.getUserMedia({video:true})
+.then(stream=>{
+video.srcObject=stream
+})
+
+function startBooth(){
+
+photos=[]
+strip.innerHTML=""
+
+let shot=0
+
+function takeSequence(){
+
+if(shot>=4){
+countdown.innerText="Done!"
+return
+}
+
+let time=3
+countdown.innerText=time
+
+let timer=setInterval(()=>{
+
+time--
+
+if(time>0){
+countdown.innerText=time
+}else{
+
+clearInterval(timer)
+
+ctx.drawImage(video,0,0,320,240)
+
+let img=document.createElement("img")
+img.src=canvas.toDataURL("image/png")
+
+strip.appendChild(img)
+photos.push(img.src)
+
+shot++
+
+setTimeout(takeSequence,1000)
+
+}
+
+},1000)
+
+}
+
+takeSequence()
+
+}
+
+function downloadStrip(){
+
+if(photos.length===0){
+alert("Take photos first 📸")
+return
+}
+
+let c=document.createElement("canvas")
+c.width=220
+c.height=photos.length*250
+
+let ctx2=c.getContext("2d")
+
+let y=0
+
+photos.forEach(src=>{
+let img=new Image()
+img.src=src
+img.onload=()=>{
+ctx2.drawImage(img,10,y,200,240)
+y+=250
+}
+})
+
+setTimeout(()=>{
+let link=document.createElement("a")
+link.download="click_and_smile_strip.png"
+link.href=c.toDataURL()
+link.click()
+},700)
+
+}
+
+</script>
 
 </body>
 </html>
