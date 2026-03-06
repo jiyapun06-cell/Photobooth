@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀 Coquette Photo Studio 🎀</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,600&family=Sneaks&display=swap');
+
+        :root {
+            --soft-pink: #fce4ec;
+            --rose: #f8bbd0;
+            --cream: #fffaf0;
+            --ribbon-red: #d81b60;
+            --border-style: 8px double #f8bbd0;
+        }
+
+        body {
+            background-color: var(--soft-pink);
+            /* Soft vintage pattern */
+            background-image: radial-gradient(#f8bbd0 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            font-family: 'Playfair Display', serif;
+            color: #5d4037;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--ribbon-red);
+        }
+
+        .subtitle {
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .booth-outer {
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: var(--border-style);
+            position: relative;
+        }
+
+        /* Decorative bows using CSS */
+        .booth-outer::before, .booth-outer::after {
+            content: '🎀';
+            position: absolute;
+            font-size: 2rem;
+            top: -20px;
+        }
+        .booth-outer::before { left: -10px; }
+        .booth-outer::after { right: -10px; }
+
+        .video-container {
+            position: relative;
+            background: #eee;
+            line-height: 0;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        video {
+            width: 100%;
+            max-width: 500px;
+            transform: scaleX(-1);
+            filter: sepia(0.1) contrast(1.1) brightness(1.05); /* Soft vintage filter */
+        }
+
+        .controls {
+            margin-top: 30px;
+        }
+
+        #snap-btn {
+            background-color: white;
+            border: 2px solid var(--rose);
+            color: var(--ribbon-red);
+            padding: 12px 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(248, 187, 208, 0.4);
+        }
+
+        #snap-btn:hover {
+            background-color: var(--rose);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .gallery {
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .gallery-item {
+            background: white;
+            padding: 10px 10px 30px 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:nth-child(even) {
+            transform: rotate(3deg);
+        }
+
+        .gallery-item:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 5;
+        }
+
+        .gallery img {
+            width: 100%;
+            display: block;
+        }
+
+        canvas { display: none; }
+
+        .flash {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 100;
+        }
+      @keyframes trigger-flash {
+            0% { opacity: 0.8; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flash" id="flash"></div>
+    
+    <h1>La Rêverie</h1>
+    <div class="subtitle">✨ capture your loveliest moments ✨</div>
+
+    <div class="booth-outer">
+        <div class="video-container">
+            <video id="video" autoplay playsinline></video>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="snap-btn">capture a memory 🎀</button>
+    </div>
+
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const snapBtn = document.getElementById('snap-btn');
+        const gallery = document.getElementById('gallery');
+        const flash = document.getElementById('flash');
+
+        async function
