@@ -3,179 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎀 Coquette Photo Studio 🎀</title>
+    <title>Coquette Photo Booth</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,600&family=Sneaks&display=swap');
-
-        :root {
-            --soft-pink: #fce4ec;
-            --rose: #f8bbd0;
-            --cream: #fffaf0;
-            --ribbon-red: #d81b60;
-            --border-style: 8px double #f8bbd0;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffb3d9, #c3c4e8, #ffe6f7);
+            background-size: 300% 300%;
+            animation: gradient 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
-        body {
-            background-color: var(--soft-pink);
-            /* Soft vintage pattern */
-            background-image: radial-gradient(#f8bbd0 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
-            font-family: 'Playfair Display', serif;
-            color: #5d4037;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
         }
 
         h1 {
-            font-style: italic;
-            font-weight: 400;
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: var(--ribbon-red);
-        }
-
-        .subtitle {
+            font-size: 2.5rem;
+            color: #d06f8b;
+            font-weight: 600;
+            text-transform: uppercase;
             margin-bottom: 30px;
             letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
+            font-family: 'Cursive', sans-serif;
         }
 
-        .booth-outer {
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: var(--border-style);
-            position: relative;
-        }
-
-        /* Decorative bows using CSS */
-        .booth-outer::before, .booth-outer::after {
-            content: '🎀';
-            position: absolute;
-            font-size: 2rem;
-            top: -20px;
-        }
-        .booth-outer::before { left: -10px; }
-        .booth-outer::after { right: -10px; }
-
-        .video-container {
-            position: relative;
-            background: #eee;
-            line-height: 0;
-            overflow: hidden;
-            border-radius: 4px;
-        }
-
-        video {
-            width: 100%;
-            max-width: 500px;
-            transform: scaleX(-1);
-            filter: sepia(0.1) contrast(1.1) brightness(1.05); /* Soft vintage filter */
-        }
-
-        .controls {
-            margin-top: 30px;
-        }
-
-        #snap-btn {
-            background-color: white;
-            border: 2px solid var(--rose);
-            color: var(--ribbon-red);
-            padding: 12px 40px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-style: italic;
-            cursor: pointer;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(248, 187, 208, 0.4);
-        }
-
-        #snap-btn:hover {
-            background-color: var(--rose);
+        button {
+            background-color: #ff6cb3;
             color: white;
-            transform: translateY(-2px);
+            font-size: 1.4rem;
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            margin: 10px;
         }
 
-        .gallery {
-            margin-top: 50px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 900px;
+        button:hover {
+            background-color: #ff4c8b;
+            transform: scale(1.1);
         }
 
-        .gallery-item {
-            background: white;
-            padding: 10px 10px 30px 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transform: rotate(-2deg);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:nth-child(even) {
-            transform: rotate(3deg);
-        }
-
-        .gallery-item:hover {
-            transform: rotate(0deg) scale(1.05);
-            z-index: 5;
-        }
-
-        .gallery img {
-            width: 100%;
+        .camera {
             display: block;
+            margin: 20px auto;
+            border-radius: 15px;
+            border: 5px solid #ffe6f7;
         }
 
-        canvas { display: none; }
-
-        .flash {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: white;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 100;
+        .preview-container {
+            margin-top: 20px;
         }
-      @keyframes trigger-flash {
-            0% { opacity: 0.8; }
-            100% { opacity: 0; }
+
+        .preview-img {
+            width: 250px;
+            height: auto;
+            border-radius: 15px;
+            border: 4px solid #ffe6f7;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #ff6cb3;
+            margin-top: 20px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <div class="flash" id="flash"></div>
-    
-    <h1>La Rêverie</h1>
-    <div class="subtitle">✨ capture your loveliest moments ✨</div>
-
-    <div class="booth-outer">
-        <div class="video-container">
-            <video id="video" autoplay playsinline></video>
-        </div>
+<div class="container">
+    <h1>Coquette Photo Booth</h1>
+    <button id="startButton">Start Camera</button>
+    <video id="video" class="camera hidden" width="320" height="240" autoplay></video>
+    <canvas id="canvas" class="hidden" width="320" height="240"></canvas>
+    <div class="preview-container hidden">
+        <h2>Your Snap!</h2>
+        <img id="photo" class="preview-img" src="" alt="Your Photo">
     </div>
+    <button id="snapButton" class="hidden">Take Photo</button>
+    <p id="message" class="message">Welcome to your Coquette experience! 💕</p>
+</div>
 
-    <div class="controls">
-        <button id="snap-btn">capture a memory 🎀</button>
-    </div>
+<script>
+    const startButton = document.getElementById("startButton");
+    const snapButton = document.getElementById("snapButton");
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const photo = document.getElementById("photo");
+    const message = document.getElementById("message");
+    const previewContainer = document.querySelector(".preview-container");
 
-    <canvas id="canvas" width="640" height="480"></canvas>
+    const constraints = {
+        video: { facingMode: "user" }
+    };
 
-    <div class="gallery" id="gallery"></div>
+    let streaming = false;
 
-    <script>
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const snapBtn = document.getElementById('snap-btn');
-        const gallery = document.getElementById('gallery');
-        const flash = document.getElementById('flash');
+    // Start camera
+    startButton.addEventListener('click', function () {
+        if (!streaming) {
+            startButton.classList.add('hidden');
+            message.textContent = "Pose for the perfect shot!";
+            navigator.mediaDevices.getUserMedia(constraints)
+            .then(function (stream) {
+                    video.srcObject = stream;
+                    streaming = true;
+                    video.classList.remove('hidden');
+                    snapButton.classList.remove('hidden');
+                })
+                .catch(function (err) {
+                    message.textContent = "Oops! Error: " + err.message;
+                });
+        }
+    });
 
-        async function
+    // Take a snapshot
+    snapButton.addEventListener('click', function () {
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        const data = canvas.toDataURL('image/png');
+        photo.setAttribute('src', data);
+        previewContainer.classList.remove('hidden');
+        message.textContent = "Here's your adorable snap! 💖";
+        snapButton.classList.add('hidden');
+    });
+</script>
+
+</body>
+</html>
